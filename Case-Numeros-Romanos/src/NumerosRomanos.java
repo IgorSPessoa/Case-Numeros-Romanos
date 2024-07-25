@@ -6,8 +6,7 @@ public class NumerosRomanos {
     private int numero;
     private String romano;
 
-    // Arrays que armazenam os valores dos números inteiros e seus correspondentes
-    // algarismos romanos
+    // Arrays que armazenam os valores dos números inteiros e seus correspondentes em algarismos romanos
     private static final int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
     private static final String[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
@@ -27,7 +26,7 @@ public class NumerosRomanos {
     private String numeroParaRomano(int num) {
         StringBuilder roman = new StringBuilder(); // Usado para construir a string do algarismo romano
         for (int i = 0; i < values.length; i++) { // Percorre todos os valores e símbolos
-            while (num >= values[i]) { // Enquanto o número for maior ou igual ao valor atual
+            while (num >= values[i]) {
                 num -= values[i];
                 roman.append(symbols[i]); // Adiciona o símbolo correspondente ao resultado
             }
@@ -50,7 +49,7 @@ public class NumerosRomanos {
         return sum; // Retorna o número inteiro resultante
     }
 
-    // Método auxiliar para converter um caractere romano individual para seu valor
+    // Método para converter um caractere romano individual para seu valor
     // inteiro correspondente
     private int valorRomano(char romanChar) {
         switch (romanChar) {
