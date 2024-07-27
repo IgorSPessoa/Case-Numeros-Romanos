@@ -6,7 +6,8 @@ public class NumerosRomanos {
     private int numero;
     private String romano;
 
-    // Arrays que armazenam os valores dos números inteiros e seus correspondentes em algarismos romanos
+    // Arrays que armazenam os valores dos números inteiros e seus correspondentes
+    // em algarismos romanos
     private static final int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
     private static final String[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
@@ -83,44 +84,55 @@ public class NumerosRomanos {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        try {
-            System.out.println("Escolha uma opção: \n");
-            System.out.println("1. Converter número inteiro para algarismo romano");
-            System.out.println("2. Converter algarismo romano para número inteiro \n");
-            int opcao = scanner.nextInt();
-            scanner.nextLine();
+        boolean continuar = true;
 
-            switch (opcao) {
-                case 1:
-                    try {
-                        System.out.print("Digite um número inteiro: ");
-                        int numero = scanner.nextInt();
-                        NumerosRomanos nr = new NumerosRomanos(numero);// Passando valor inserido pelo usuario para o
-                                                                       // construtor
-                        System.out.println("Número " + numero + " em algarismo romano é: " + nr.getRomano());
-                    } catch (InputMismatchException e) {
-                        System.out.println("Entrada inválida. Insira um número inteiro.");
-                    }
-                    break;
-                case 2:
-                    try {
-                        System.out.print("Digite um algarismo romano: ");
-                        String romano = scanner.nextLine().toUpperCase();
-                        NumerosRomanos nr = new NumerosRomanos(romano); // Passando valor inserido pelo usuario para o
-                                                                        // construtor
-                        System.out.println("Algarismo romano " + romano + " em número é: " + nr.getNumero());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Entrada inválida. Insira um algarismo romano válido.");
-                    }
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
+        while (continuar) {
+            try {
+                System.out.println("\nEscolha uma opção: \n");
+                System.out.println("1. Converter número inteiro para algarismo romano");
+                System.out.println("2. Converter algarismo romano para número inteiro");
+                System.out.println("3. Sair\n");
+                int opcao = scanner.nextInt();
+                scanner.nextLine(); // Limpa o buffer do scanner
+
+                switch (opcao) {
+                    case 1:
+                        try {
+                            System.out.print("Digite um número inteiro: ");
+                            int numero = scanner.nextInt();
+                            NumerosRomanos nr = new NumerosRomanos(numero); // Passando valor inserido pelo usuario para
+                                                                            // o construtor
+                            System.out.println("Número " + numero + " em algarismo romano é: " + nr.getRomano());
+                        } catch (InputMismatchException e) {
+                            System.out.println("Entrada inválida. Insira um número inteiro.");
+                            scanner.next(); // Limpa a entrada inválida
+                        }
+                        break;
+                    case 2:
+                        try {
+                            System.out.print("Digite um algarismo romano: ");
+                            String romano = scanner.nextLine().toUpperCase();
+                            NumerosRomanos nr = new NumerosRomanos(romano); // Passando valor inserido pelo usuario para
+                                                                            // o construtor
+                            System.out.println("Algarismo romano " + romano + " em número é: " + nr.getNumero());
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Entrada inválida. Insira um algarismo romano válido.");
+                        }
+                        break;
+                    case 3:
+                        continuar = false;
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Escolha 1, 2 ou 3.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida. Escolha 1, 2 ou 3.");
+                scanner.next(); // Limpa a entrada inválida
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Opção inválida. Escolha 1 ou 2.");
-        } finally {
-            scanner.close();
         }
+
+        scanner.close();
     }
 }
